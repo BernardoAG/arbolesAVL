@@ -110,6 +110,124 @@ def factoresNuevos(actual):
             papa = actual.getPapa()
 
 
+def rotar(nodo):
+    resp = None
+    if (not nodo.getIzq() == None and nodo.getFe() < -1 and nodo.getIzq().getFe() < 0):
+        pi = nodo.getPapa()
+        alfa = nodo
+        beta = nodo.getIzq()
+        gamma = beta.getIzq()
+        a = gamma.getIzq()
+        b = gamma.getDer()
+        c = beta.getDer()
+        d = alfa.getDer()
+        gamma.setDer(None)
+        gamma.setIzq(None)
+        gamma.cuelga(a)
+        gamma.cuelga(b)
+        alfa.setDer(None)
+        alfa.setIzq(None)
+        alfa.cuelga(c)
+        alfa.cuelga(d)
+        beta.cuelga(gamma)
+        beta.cuelga(alfa)
+        beta.setPapa(pi)
+        if (not pi == None):
+            pi.cuelga(beta)
+        else:
+            this.__raiz = beta
+        actualizarFeHeight(beta)
+        actualizarFeHeight(gamma)
+        actualizarFeHeight(alfa)
+        resp = beta
+
+    if (not nodo.getIzq() == None and nodo.getIzq().getFe() > 0 and nodo.getFe() < -1):
+        pi = nodo.getPapa()
+        alfa = nodo
+        beta = alfa.getIzq()
+        gamma = beta.getDer()
+        a = beta.getIzq()
+        b = gamma.getIzq()
+        c = gamma.getDer()
+        d = alfa.getDer()
+        if (not pi  == None):
+            pi.cuelga(gamma)
+        else:
+            this.__raiz = gamma
+        gamma.cuelga(beta)
+        gamma.cuelga(alfa)
+        gamma.setPapa(pi)
+        beta.setIzq(None)
+        beta.cuelga(a)
+        beta.setDer(None)
+        beta.cuelga(b)
+        alfa.setIzq(None)
+        alfa.setDer(None)
+        alfa.cuelga(c)
+        alfa.cuelga(d)
+        actualizarFeHeight(gamma)
+        actualizarFeHeight(alfa)
+        actualizarFeHeight(beta)
+        resp = gamma
+
+    if (not nodo.getDer() == None and nodo.getFe() > 1 and nodo.getDer().getFe() > 0):
+        pi = nodo.getPapa()
+        alfa = nodo
+        beta = nodo.getDer()
+        gamma = beta.getDer()
+        a = alfa.getIzq()
+        b = beta.getIzq()
+        c = gamma.getIzq()
+        d = gamma.getDer()
+        gamma.setDer(None)
+        gamma.setIzq(None)
+        gamma.cuelga(c)
+        gamma.cuelga(d)
+        alfa.setDer(None)
+        alfa.setIzq(None)
+        alfa.cuelga(a)
+        alfa.cuelga(b)
+        beta.setPapa(pi)
+        beta.cuelga(gamma)
+        beta.cuelga(alfa)
+        if (not pi == None):
+            pi.cuelga(beta)
+        else:
+            this.__raiz = beta
+        actualizarFeHeight(gamma)
+        actualizarFeHeight(alfa)
+        actualizarFeHeight(beta)
+        resp = beta
+
+    if (not nodo.getDer() == None and nodo.getDer().getFe() < 0 and nodo.getFe() > 1):
+        pi = nodo.getPapa()
+        alfa = nodo
+        beta = alfa.getDer()
+        gamma = beta.getIzq()
+        a = alfa.getIzq()
+        b = gamma.getIzq()
+        c = gamma.getDer()
+        d = beta.getDer()
+        if (not pi == None):
+            pi.cuelga(gamma)
+        else:
+            this.__raiz = gamma
+        gamma.cuelga(beta)
+        gamma.cuelga(alfa)
+        gamma.setPapa(pi)
+        beta.setIzq(None)
+        beta.cuelga(c)
+        beta.setDer(None)
+        beta.cuelga(d)
+        alfa.setIzq(None)
+        alfa.setDer(None)
+        alfa.cuelga(a)
+        alfa.cuelga(b)
+        actualizarFeHeight(gamma)
+        actualizarFeHeight(alfa)
+        actualizarFeHeight(beta)
+        resp = gamma
+    return resp
 
 a = ArbolAVL()
 a.inserta(1)
