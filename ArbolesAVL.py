@@ -4,25 +4,27 @@ class NodoAVL:
     def __init__(self, dat=0):
         self.__fe = 0
         self.__dato = dat
-
+        self.__der=None
+        self.__izq=None
+        self.__papa=None
 
     def getFe(self):
-        return fe
+        return self.__fe
 
     def setFe(self, fe):
         self.__fe = fe;
 
     def getDer(self):
-        return self.der
+        return self.__der
 
     def getIzq(self):
-        return self.izq
+        return self.__izq
 
     def getPapa(self):
-        return self.papa
+        return self.__papa
 
     def getElem(self):
-        return self.dato
+        return self.__dato
 
     def setDer(self, lig):
         self.__der = lig
@@ -40,19 +42,19 @@ class NodoAVL:
         if (n == None):
             return
         n.setPapa(self)
-        if n.getElem() <= dato:
+        if n.getElem() <= self.__dato:
             self.__izq=n;
         else:
             self.__der=n;
 
     def suma(self, n):
         if n.getElem() <= self.__dato:
-            self.fe =self.fe-1
+            self.fe =self__.fe-1
         else:
-            self.fe =self.fe+1
+            self.fe =self.__fe+1
 
     def toString(self):
-        return self.dato + ""
+        return self.__dato + ""
 
 def nuevoN(dato=0):
     n=NodoAVL(dato)
@@ -63,18 +65,18 @@ class ArbolAVL:
     __variable = "raiz", "contador"
 
     def __init__(self):
-        self.contador=0
-        self.raiz=nuevoN()
+        self.__contador=0
+        self.__raiz=nuevoN()
 
     def inserta(self, elem):
         nuevo = nuevoN(elem)
         actual = nuevoN()
         papa = nuevoN()
-        actual = self.raiz
-        papa = self.raiz
+        actual = self.__raiz
+        papa = self.__raiz
 
-        if self.raiz == None:
-            self.raiz = nuevo
+        if self.__raiz == None:
+            self.__raiz = nuevo
         else:
             while actual != None:
                 papa = actual
@@ -84,7 +86,7 @@ class ArbolAVL:
                     actual = actual.getDer()
             papa.cuelga(nuevo)
             factoresNuevos(nuevo)
-        self.contador=self.contador+1
+        self.__contador=self.__contador+1
 
 
 a = ArbolAVL()
@@ -95,16 +97,16 @@ a.inserta(-1)
 a.inserta(4)
 a.inserta(3)
 
-a.eliminaIterativo(1);
-a.inserta(5);
-a.inserta(6);
+#a.eliminaIterativo(1);
+a.inserta(5)
+a.inserta(6)
 
-a.imprime();
+#a.imprime();
 
-System.out.println("\nRaiz: " + a.raiz.getElem());
-System.out.println("Fe: " + a.raiz.getFe() + "\n");
-System.out.println("\nPor niveles:\n");
-a.imprimeNiveles();
-a.eliminaIterativo(3);
-a.imprimeNiveles();
+print("\nRaiz: ")
+print("Fe: " + "\n")
+print("\nPor niveles:\n")
+#a.imprimeNiveles();
+#a.eliminaIterativo(3);
+#a.imprimeNiveles();
 # arbolesAVL
