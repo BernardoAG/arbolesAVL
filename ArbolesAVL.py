@@ -88,6 +88,28 @@ class ArbolAVL:
             factoresNuevos(nuevo)
         self.__contador=self.__contador+1
 
+def factoresNuevos(actual):
+    termino = False
+    papa = actual.getPapa()
+    while (not (papa == None) and (not termino)):
+        fe = papa.getFe()
+        if actual == papa.getDer():
+            papa.setFe(fe + 1)
+        else:
+            papa.setFe(fe - 1)
+
+        if papa.getFe() == 0:
+            termino = True
+        if papa.getFe() == 2 or papa.getFe() == -2:
+            print("Rota")
+            termino = True
+            actual = rotar(papa)
+            papa = actual.getPapa()
+        else:
+            actual = papa
+            papa = actual.getPapa()
+
+
 
 a = ArbolAVL()
 a.inserta(1)
